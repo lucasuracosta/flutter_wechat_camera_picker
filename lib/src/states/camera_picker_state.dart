@@ -1803,13 +1803,15 @@ class CameraPickerState extends State<CameraPicker>
           }
           final lockedOrientation = value.lockedCaptureOrientation;
           int? quarterTurns = lockedOrientation?.index;
-          if (value.deviceOrientation == DeviceOrientation.landscapeLeft) {
-            quarterTurns--;
-          } else if (value.deviceOrientation ==
-              DeviceOrientation.landscapeRight) {
-            quarterTurns++;
+          if (quarterTurns != null) {
+            if (value.deviceOrientation == DeviceOrientation.landscapeLeft) {
+              quarterTurns--;
+            } else if (value.deviceOrientation ==
+                DeviceOrientation.landscapeRight) {
+              quarterTurns++;
+            }
           }
-          return RotatedBox(quarterTurns: quarterTurns, child: child);
+          return RotatedBox(quarterTurns: quarterTurns ?? 0, child: child);
         },
         child: preview,
       );
